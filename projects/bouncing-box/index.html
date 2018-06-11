@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Zoned Out</title>
+	<script src="jquery.min.js"></script>
+
+<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+	<!-- BEGIN CSS -->
+	<style>
+	body{
+		background: rgb(255, 251, 57);
+	}
+		[class="box"] {
+			display: block;
+			position: absolute;
+			width: 480px;
+			height: 250px;
+			top: 100px;
+			left: 1px;
+			right: 2px;
+			background-image:url("https://i.gifer.com/1kL7.gif") ;
+			font-size: 250%;
+			color:#ff2;
+			text-align: center;
+			
+		}	
+	</style>
+ 	
+</head>
+<body class="board">
+	<!-- HTML for the box -->
+	<div class="box">0</div>
+
+	<!-- BEGIN JAVASCRIPT -->
+	<script>
+		(function(){
+			'use strict'
+			/* global &*/
+			
+			// Variable declarations
+			var box;
+			var boardWidth;
+			var update;
+			var handleBoxClick;
+			var direction;
+			direction= 1;
+		
+			// jQuery stuff setup for you
+			box = $('.box');
+			boardWidth = $('.board').width();
+
+			// TODO 2
+			var position;
+			var points;
+			var speed;
+			 position= 0;
+			 points= 0;
+			 speed= 10;
+			
+			function update() {
+				// TODO 3 / 6 / 7 / 8
+			position = position + (speed * direction);
+			if(position > boardWidth){
+    		direction = -1;
+			}
+    		
+    		if(position < 0){
+    		direction = 1;
+		    }
+    		
+			
+			
+			box.text(points);
+			box.css('left', position);
+			}
+			
+
+
+			
+			function handleBoxClick() {position = position + speed;
+    		box.css('left', position);
+    		speed = speed + 3;
+				position = 0;
+				
+				points = points + 1;
+				
+			};
+
+
+			//this calls update every 50 milliseconds
+			setInterval(update, 50);
+			// this calls the handle handleBoxClick function every time the box is clicked on
+			box.on('click', handleBoxClick);
+		})();
+	</script>
+</body>
+</html>
